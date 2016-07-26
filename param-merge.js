@@ -17,6 +17,9 @@ var params = {};
 util.log('parsing override values');
 values.forEach(function(f){
   var bits = f.split('=');
+  if(bits.length != 2 || !bits[0] || !bits[1]){
+    util.log(`[Error] Could not parse override: ${f}`);
+  }
   params[bits[0].trim()] =  { value: bits[1].trim() };
 });
 
