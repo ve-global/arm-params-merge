@@ -1,0 +1,22 @@
+{
+  "name": "arm-params-merge",
+  "version": "1.0.0",
+  "description": "utility to merge arm param file with specified overrides",
+  "main": "param-merge.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ve-interactive/arm-params-merge.git"
+  },
+  "author": "Andy Royle <ajroyle@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ve-interactive/arm-params-merge/issues"
+  },
+  "homepage": "https://github.com/ve-interactive/arm-params-merge#readme",
+  "dependencies": {
+    "lodash.merge": "^4.5.0"
+  }
+}
