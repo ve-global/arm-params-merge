@@ -7,10 +7,14 @@ var merge = require('lodash.merge');
 
 var args = process.argv.slice(2);
 
+var templateFilename = args[0];
+var parameterFilename = args[1];
+
+util.log('reading template file');
+var template = require(path.resolve(templateFilename));
 util.log('reading parameter file');
-var filename = args[0];
-var fileParams = require(path.resolve(filename));
-var values = args.slice(1);
+var fileParams = require(path.resolve(parameterFilename));
+var values = args.slice(2);
 
 var params = {};
 
@@ -20,13 +24,17 @@ values.forEach(function(f){
   if(bits.length != 2 || !bits[0] || !bits[1]){
     util.log(`[Error] Could not parse override: ${f}`);
   }
-  params[bits[0].trim()] =  { value: bits[1].trim() };
+  var key = bits[0].trim();
+  var value = bits[1].trim();
+  if(!!template.parameters[key]){
+    params[key] =  { value: value };
+  }
 });
 
 fileParams.parameters = merge(fileParams.parameters, params);
 
 util.log('writing output file');
-fs.writeFile(filename, JSON.stringify(fileParams, null, 2), (err) => {
+fs.writeFile(parameterFilename, JSON.stringify(fileParams, null, 2), (err) => {
   if(err){
     util.log(err);
   }
